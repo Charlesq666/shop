@@ -10,14 +10,16 @@ type Props = {
   description: string,
   price: string,
   _id: string
-  images: string[]
+  images: string[],
+  category: string
 }
 const ProductForm = ( {
   _id,
   title: existingTitle,
   description: existingDescription,
   price: existingPrice,
-  images: existingImages
+  images: existingImages,
+  category: existingCategory
 }: Props) => {
   const [title, setTitle] = useState(existingTitle || '')
   const [description, setDescription] = useState(existingDescription)
@@ -26,10 +28,19 @@ const ProductForm = ( {
   const [gotoProducts, setGotoProducts] = useState(false)
   const [isUploading, setIsUploading] = useState(false)
   const router = useRouter()
+  const [categories, setCategories] = useState([])  
+  const [category, setCategory] = useState(existingCategory)
+
+  useEffect(() => {
+    axios.get('/api/categories')
+      .then(res => {
+        setCategories(res.data)
+      })
+  }, [])
 
   async function saveProduct(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    const data = {title, description, price, images}
+    const data = {title, description, price, images, category}
     if (_id) {
       //update product
       await axios.put('/api/products/', {...data, _id})
@@ -75,6 +86,17 @@ const ProductForm = ( {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
+
+      <label> Categories </label>
+      <select
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
+      >
+        <option value="">None</option>
+        {categories.length > 0 && categories.map(category => (
+          <option key={category._id} value={category._id}>{category.name}</option>
+        ))}
+      </select>
 
       <label> Images </label>
       <div className="mb-2 flex flex-wrap gap-2">
