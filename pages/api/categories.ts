@@ -11,10 +11,11 @@ export default async function handler(
   await mongooseConnect()
   if (method === 'POST') {
     // create a new category
-    const {name, parentCategory} = req.body
+    const {name, parentCategory, properties} = req.body
     const categoryDoc = await Category.create({
       name, 
-      parent: parentCategory 
+      parent: parentCategory,
+      properties
     }) 
     res.status(200).json(categoryDoc)
   } else if (method === 'GET') {
@@ -23,10 +24,11 @@ export default async function handler(
     res.status(200).json(categories)
   } else if (method == 'PUT') {
     // update a category
-    const {_id, name, parentCategory} = req.body
+    const {_id, name, parentCategory, properties} = req.body
     const categoryDoc = await Category.updateOne({_id}, {
       name,
-      parent: parentCategory
+      parent: parentCategory,
+      properties
     })
     res.status(200).json(categoryDoc)
   } else if (method == 'DELETE') {
