@@ -11,8 +11,8 @@ function Categories( {swal}: Props) {
   const [editedCategory, setEditedCategory] = useState(null)
   const [name, setName] = useState<string>("")
   const [parentCategory, setParentCategory] = useState("")
-  const [categories, setCategories] = useState<string[]>([])
-  const [properties, setProperties] = useState<string[]>([])
+  const [categories, setCategories] = useState([])
+  const [properties, setProperties] = useState([])
   useEffect(() => {
     fetchCategories()
   }, [])
@@ -28,6 +28,12 @@ function Categories( {swal}: Props) {
     setEditedCategory(category)
     setName(category.name)
     setParentCategory(category.parent?._id)
+    setProperties(
+      category.properties.map(({name, values}) => ({
+        name, 
+        values: values.join(',')
+      })
+    ))
   }
 
   function deleteCategory(category) {
@@ -42,11 +48,6 @@ function Categories( {swal}: Props) {
       if (result.isConfirmed) {
         await axios.delete(`/api/categories?_id=${category._id}`)
         fetchCategories()
-        swal.fire(
-          'Deleted!',
-          'Your category has been deleted.',
-          'success'
-        )
       }
     })
   }
@@ -56,10 +57,10 @@ function Categories( {swal}: Props) {
     const data = {
       name,
       parent: parentCategory || null,
-      // properties: properties.map(p => {
-      //   name: p.name, 
-      //   values: p.values.split(',') 
-      // })
+      properties: properties.map(p => ({
+        name: p.name,
+        values: p.values.split(',').map(v => v.trim())
+      }))
     }
     // if parent category i "" don't include it in the data
     if (editedCategory) {
@@ -69,10 +70,14 @@ function Categories( {swal}: Props) {
     } else {
       await axios.post('/api/categories', data)
     }
+    
+    // reset form
     setName("")
     setParentCategory("")
-    fetchCategories()
     setProperties([])
+
+    // refetch
+    fetchCategories()
   }
 
   return (
