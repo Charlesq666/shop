@@ -2,6 +2,8 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import {Category} from '@/models/Category';
 import mongoose from 'mongoose';
 import { mongooseConnect } from '@/lib/mongoose';
+import { getServerSession } from 'next-auth';
+import { authOptions, isAdminRequest } from './auth/[...nextauth]';
 
 export default async function handler(
     req: NextApiRequest,
@@ -9,6 +11,8 @@ export default async function handler(
 ){
   const {method} = req
   await mongooseConnect()
+  await isAdminRequest(req, res)  
+
   if (method === 'POST') {
     // create a new category
     const {name, parent, properties} = req.body
