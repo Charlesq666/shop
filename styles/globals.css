@@ -24,7 +24,7 @@ label {
 }
 
 .btn-primary {
-  @apply bg-blue-900 text-white px-4 py-1 rounded-md;
+  @apply bg-primary text-white px-4 py-1 rounded-sm;
 }
 
 .btn-red {
@@ -40,15 +40,15 @@ label {
 }
 
 table.basic {
-  @apply w-full
+  @apply w-full bg-white rounded-sm shadow-md
 }
 
 table.basic thead tr td{
-  @apply bg-blue-100;
+  @apply text-sm text-gray-600 uppercase border-b border-gray-300 px-2;
 }
 
 table.basic tr td {
-  @apply border-2 border-blue-200 p-2;
+  @apply p-2;
 }
 
 table.basic a {

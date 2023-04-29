@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import {Product} from '@/models/Product';
 import { mongooseConnect } from '@/lib/mongoose';
+import { isAdminRequest } from './auth/[...nextauth]';
 
 type Data = {
   name: string
@@ -12,6 +13,8 @@ export default async function handler(
 ) {
   
   await mongooseConnect()
+  await isAdminRequest(req, res)
+  
   const {method} = req;
   if (method === 'POST') {
     const {title, description, price, images, category, properties} = req.body;
