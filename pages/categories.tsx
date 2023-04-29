@@ -152,7 +152,7 @@ function Categories( {swal}: Props) {
 
               {/* REMOVE BUTTON */}
               <button 
-                className="btn-default text-sm" 
+                className="btn-red" 
                 type="button" 
                 onClick={() => {
                   setProperties(prev => {
@@ -160,7 +160,7 @@ function Categories( {swal}: Props) {
                   })
                 }}
               >
-                remove
+                Remove
               </button>
             </div>
           ))}
@@ -211,12 +211,12 @@ function Categories( {swal}: Props) {
                 <td>
                   <button 
                     onClick={() => editCategory(category)} 
-                    className="btn-primary py-1 mr-1"
+                    className="btn-default py-1 mr-1"
                   >
                     Edit
                   </button>
                   <button 
-                    className="btn-primary py-1"
+                    className="btn-red py-1"
                     onClick={() => deleteCategory(category)}
                   >
                     Delete

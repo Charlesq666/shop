@@ -112,23 +112,25 @@ const ProductForm = ( {
 
       {/* PROPERTIES OF PRODUCT */}
       {propertiesToFill.length > 0 && propertiesToFill.map((p, index) => (
-        <div key={index} className="flex gap-1">
-          <div>{p.name}</div>
-          <select
-            value = {productProperties[p.name]}
-            onChange={(e) => {
-              if(e.target.value !== "") {
-                setProductProperties( prev => {
-                  return {...prev, [p.name]: e.target.value}
-                })}
+        <div key={index} className="">
+          <label>{p.name[0].toUpperCase()+p.name.substring(1)}</label>
+          <div>
+            <select
+              value = {productProperties[p.name]}
+              onChange={(e) => {
+                if(e.target.value !== "") {
+                  setProductProperties( prev => {
+                    return {...prev, [p.name]: e.target.value}
+                  })}
+                }
               }
-            }
-          >
-            <option value="">None</option>
-            {p.values.map((v, j) => (
-              <option key={j} value={v}>{v}</option>
-            ))}
-          </select>
+            >
+              <option value="">None</option>
+              {p.values.map((v, j) => (
+                <option key={j} value={v}>{v}</option>
+              ))}
+            </select>
+          </div>
         </div>
       ))}
 
@@ -140,7 +142,7 @@ const ProductForm = ( {
           className="flex flex-wrap gap-1"
         >
           {!!images?.length && images.map(link => (
-            <div key={link} className="h-24">
+            <div key={link} className="h-24 bg-white p-1 shadow-sm border border-gray-200">
               <img src={link} className="rounded-lg"/>
             </div>
           ))}
@@ -151,7 +153,7 @@ const ProductForm = ( {
           </div>
         )}
         <label
-          className="w-24 h-24 text-center flex items-center justify-center flex-col text-sm gap-1 text-gray-500 rounded-md bg-gray-200 cursor-pointer"
+          className="w-24 h-24 text-center flex items-center justify-center flex-col text-sm gap-1 text-gray-500 rounded-sm bg-white cursor-pointer shadow-sm border border-gray-200"
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
             <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 7.5h-.75A2.25 2.25 0 004.5 9.75v7.5a2.25 2.25 0 002.25 2.25h7.5a2.25 2.25 0 002.25-2.25v-7.5a2.25 2.25 0 00-2.25-2.25h-.75m0-3l-3-3m0 0l-3 3m3-3v11.25m6-2.25h.75a2.25 2.25 0 012.25 2.25v7.5a2.25 2.25 0 01-2.25 2.25h-7.5a2.25 2.25 0 01-2.25-2.25v-.75" />
