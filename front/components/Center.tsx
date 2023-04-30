@@ -13,7 +13,7 @@ const StyledDiv = styled.div`
 
 export default function Center ({children} : Props) {
   return (
-    <div>
+    <div className=''>
       {children}
     </div>
   )
