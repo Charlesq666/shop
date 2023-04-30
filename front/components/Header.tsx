@@ -1,45 +1,21 @@
 import React from 'react'
 import Link from "next/link"
-import styled from 'styled-components'
 import Center from './Center'
-
-const StyledHeader = styled.header`
-  background-color: #222;
-`
-
-const Logo = styled(Link) `
-  color: #fff;
-`
-
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 20px 0;
-`
-
-const StyledNav = styled.nav`
-  display: flex;
-  gap: 15px;
-`
-
-const NavLink = styled(Link) `
-  color: #aaa;
-`
 
 const Header = () => {
   return (
-    <header className='bg-white'>
+    <header className='bg-black py-4'>
       <Center>
-        <Wrapper>
-          <Logo href={'/'}>Ecommerce</Logo>
-          <StyledNav>
-            <NavLink href={'/'}>Home</NavLink> 
-            <NavLink href={'/products'}>All Products</NavLink>
-            <NavLink href={'/categories'}>Categories</NavLink>
-            <NavLink href={'account'}>Account</NavLink>
-            <NavLink href={'/cart'}>Cart (0)</NavLink>
-          </StyledNav>
-        </Wrapper>
+        <div className='flex justify-between px-2 py-0 w-full'>
+          <Link href={'/'} className='ml-10 text-xl text-white'>Ecommerce</Link>
+          <nav className='flex gap-6 text-gray-300 pr-10'>
+            <Link href={'/'}>Home</Link> 
+            <Link href={'/products'}>All Products</Link>
+            <Link href={'/categories'}>Categories</Link>
+            <Link href={'account'}>Account</Link>
+            <Link href={'/cart'}>Cart (0)</Link>
+          </nav>
+        </div>
       </Center>
     </header>
   )

@@ -1,5 +1,4 @@
 import React from 'react'
-import styled, {css} from 'styled-components'
 
 type Props = {
   children: React.ReactNode;
@@ -9,25 +8,31 @@ type Props = {
   outline?: boolean
 }
 
-const Button = ({ children, size, primary, white, outline }: Props) => {
-  const baseClasses =
-    'inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500';
+export const generateButtonClasses = ({ primary, white, outline, size } : Props) => {
+  let buttonClasses = 'bg-blue-500 border-0 text-white py-1 px-4 rounded cursor-pointer inline-flex items-center';
 
-  const sizeClasses = size === 'l' ? 'text-lg px-6 py-3' : '';
+  if (white && !outline) {
+    buttonClasses += ' bg-white text-black';
+  } else if (white && outline) {
+    buttonClasses += ' bg-transparent text-white border border-white';
+  }
 
-  const primaryClasses = primary
-    ? 'bg-red-600 hover:bg-red-700 focus:ring-red-500'
-    : 'bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500';
+  if (primary) {
+    buttonClasses += ' bg-red-500 border border-red-500';
+  }
 
-  const whiteClasses = white
-    ? outline
-      ? 'bg-transparent text-white border border-white hover:bg-white hover:text-black'
-      : 'bg-white text-black'
-    : '';
+  if (size === 'l') {
+    buttonClasses += ' text-xl py-2 px-5';
+  }
 
-  const classes = `${baseClasses} ${sizeClasses} ${primaryClasses} ${whiteClasses}`;
+  return buttonClasses;
+};
 
-  return <button className={classes}>{children}</button>;
+
+const Button = ({ children, ...rest}: Props) => {
+  const buttonClasses = generateButtonClasses(rest); 
+
+  return <button className={buttonClasses}>{children}</button>;
 };
 
 export default Button
