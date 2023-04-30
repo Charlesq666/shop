@@ -13,8 +13,8 @@ const StyledDiv = styled.div`
 
 export default function Center ({children} : Props) {
   return (
-    <StyledDiv>
+    <div>
       {children}
-    </StyledDiv>
+    </div>
   )
 }

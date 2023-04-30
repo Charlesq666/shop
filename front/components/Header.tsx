@@ -28,7 +28,7 @@ const NavLink = styled(Link) `
 
 const Header = () => {
   return (
-    <StyledHeader>
+    <header className='bg-white'>
       <Center>
         <Wrapper>
           <Logo href={'/'}>Ecommerce</Logo>
@@ -41,7 +41,7 @@ const Header = () => {
           </StyledNav>
         </Wrapper>
       </Center>
-    </StyledHeader>
+    </header>
   )
 }
 
