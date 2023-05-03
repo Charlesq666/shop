@@ -6,16 +6,29 @@ type Props = {
   size?: string,
   primary?: boolean,
   white?: boolean,
-  outline?: boolean
+  outline?: boolean,
+  black?: boolean,
+  block?: boolean,
+  type?: 'button' | 'submit' | 'reset';
 }
 
-export const generateButtonClasses = ({ primary, white, outline, size } : Props) => {
-  let buttonClasses = 'bg-blue-500 py-1 px-4 rounded cursor-pointer inline-flex items-center';
+export const generateButtonClasses = ({ primary, white, outline, size, black, block } : Props) => {
+  let buttonClasses = 'py-1 px-4 rounded cursor-pointer inline-flex items-center justify-center';
+
+  if (block) {
+    buttonClasses += ' w-full block';
+  }
 
   if (primary && !outline) {
     buttonClasses += ' bg-white border border-white text-black';
   } else if (primary && outline) {
     buttonClasses += ' bg-transparent text-white border-2 border-white';
+  } 
+
+  if (black && !outline) {
+    buttonClasses += ' bg-black border border-white text-white';
+  } else if (black && outline) {
+    buttonClasses += ' bg-transparent text-white border-2 border-black';
   } 
 
   if (white && !outline) {
@@ -32,10 +45,10 @@ export const generateButtonClasses = ({ primary, white, outline, size } : Props)
 };
 
 
-const Button = ({ onClick, children, ...rest}: Props) => {
+const Button = ({ onClick, children, type, ...rest}: Props) => {
   const buttonClasses = generateButtonClasses(rest); 
 
-  return <button onClick={onClick} className={buttonClasses} >{children}</button>;
+  return <button onClick={onClick} className={buttonClasses} type={type} >{children}</button>;
 };
 
 export default Button

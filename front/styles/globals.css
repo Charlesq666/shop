@@ -12,6 +12,13 @@ body {
   @apply bg-gray-200
 }
 
+h2 {
+  @apply font-bold text-2xl
+}
+
+input.basic {
+  @apply w-full p-2 border border-solid rounded-lg
+}
 
 .truncate-lines-3 {
   display: -webkit-box;
@@ -20,3 +27,20 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+table.basic {
+  @apply w-full mt-4;
+}
+
+table.basic th {
+  @apply text-left text-sm font-bold text-gray-400 uppercase;
+}
+
+table.basic tbody tr {
+  @apply border-t
+}
+
+table.basic tbody tr td {
+  @apply py-2 px-4 text-sm text-gray-600;
+}
+
