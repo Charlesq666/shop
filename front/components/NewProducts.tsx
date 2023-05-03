@@ -9,10 +9,14 @@ type Props = {
 
 const NewProducts = ( {products} : Props) => {
   return (
-    <div className='grid grid-cols-4 gap-2 pt-2'>
-      {products?.length > 0 && products.map((product) => (
-        <ProductBox product={product} key={product._id}/>
-      ))}
+    <div className='flex items-center justify-center'>
+      <div className='mx-4 my-5 max-w-[1400px]'>
+        <div className='grid grid-cols-3 gap-4 pt-2'>
+          {products?.length > 0 && products.map((product) => (
+            <ProductBox product={product} key={product._id}/>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }

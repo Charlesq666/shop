@@ -10,7 +10,7 @@ type Props = {
 }
 
 export async function getServerSideProps() {
-  const featuredProductId = '64475d70bb25ef560d94d684'
+  const featuredProductId = '64506fc3b4d3d0f481e3acc5'
   await mongooseConnect()
   const featuredProduct = await Product.findById(featuredProductId)
   const newProducts = await Product.find({}, null, {sort: {'_id': -1}, limit: 10})
