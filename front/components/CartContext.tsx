@@ -9,7 +9,6 @@ type Props = {
 
 export function CartContextProvider ({ children } : Props) {
   const ls = typeof window !== 'undefined' ? window.localStorage : null; 
-  const defaultProducts = ls ? JSON.parse(ls?.getItem('cartProducts')) : []
   const [cartProducts, setCartProducts] = useState([]);
 
   useEffect(() => {
